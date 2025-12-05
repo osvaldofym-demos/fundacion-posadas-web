@@ -1,58 +1,34 @@
 // components/Header.tsx
-'use client';
-
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 interface HeaderProps {
-  logoBlanco?: string;
-  logoColor?: string;
+  textosSitio: any;
 }
 
-export default function Header({ logoBlanco, logoColor }: HeaderProps) {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const whiteLogo = logoBlanco || '/assets/logos/LOGO_FUNDACION_Bco-01.png';
-  const colorLogo = logoColor || '/assets/logos/LOGO_FUNDACION_color.png';
+export default function Header({ textosSitio }: HeaderProps) {
+  // Valores por defecto si no hay datos
+  const menuImpacto = textosSitio?.menuImpacto || 'Impacto';
+  const menuIniciativas = textosSitio?.menuIniciativas || 'Iniciativas';
+  const menuNosotros = textosSitio?.menuNosotros || 'Nosotros';
+  const botonDonacion = textosSitio?.botonDonacion || 'Dona ahora';
 
   return (
-    <header className={`header ${scrolled ? 'scrolled' : ''}`}>
-      <div className="header-inner">
+    <header className="header">
+      <div className="header-content">
         <Link href="/" className="logo">
-          <Image
-            src={whiteLogo}
-            alt="Fundación Posadas"
-            width={160}
-            height={48}
-            className={`logo-img logo-white ${scrolled ? 'hidden' : ''}`}
-            priority
-          />
-          <Image
-            src={colorLogo}
-            alt="Fundación Posadas"
-            width={160}
-            height={48}
-            className={`logo-img logo-color ${scrolled ? '' : 'hidden'}`}
-            priority
-          />
+          <span className="logo-text">FUNDACIÓN</span>
+          <span className="logo-text">POSADAS.</span>
         </Link>
-
+        
         <nav className="nav">
-          <Link href="#impacto" className="nav-link">Impacto</Link>
-          <Link href="#iniciativas" className="nav-link">Iniciativas</Link>
-          <Link href="#nosotros" className="nav-link">Nosotros</Link>
-          <Link href="#donar" className="btn-donate">Dona ahora</Link>
+          <Link href="#impacto" className="nav-link">{menuImpacto}</Link>
+          <Link href="#iniciativas" className="nav-link">{menuIniciativas}</Link>
+          <Link href="#nosotros" className="nav-link">{menuNosotros}</Link>
         </nav>
+        
+        <Link href="#donacion" className="donate-btn">
+          {botonDonacion}
+        </Link>
       </div>
     </header>
   );
