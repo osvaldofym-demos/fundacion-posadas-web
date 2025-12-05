@@ -76,7 +76,9 @@ export async function getHeroSlides(): Promise<FormattedHeroSlide[]> {
     id: item.id,
     titulo: item.titulo,
     subtitulo: item.subtitulo,
-    imagen: item.imagen?.url ? `${STRAPI_URL}${item.imagen.url}` : '',
+    imagen: item.imagen?.url 
+      ? (item.imagen.url.startsWith('http') ? item.imagen.url : `${STRAPI_URL}${item.imagen.url}`) 
+      : '',
     textoBoton: item.textoBoton,
   }));
 }
@@ -97,7 +99,9 @@ export async function getIniciativas(): Promise<FormattedIniciativa[]> {
     slug: item.slug,
     descripcionCorta: item.descripcionCorta,
     descripcionLarga: item.descripcionLarga,
-    imagen: item.imagen?.url ? `${STRAPI_URL}${item.imagen.url}` : '',
+    imagen: item.imagen?.url 
+      ? (item.imagen.url.startsWith('http') ? item.imagen.url : `${STRAPI_URL}${item.imagen.url}`) 
+      : '',
     color: item.color,
     stats: item.stats || [],
     comoAyudamos: (item.comoAyudamos || []).map((a: any) => a.texto),
@@ -122,7 +126,9 @@ export async function getIniciativaBySlug(slug: string): Promise<FormattedInicia
     slug: item.slug,
     descripcionCorta: item.descripcionCorta,
     descripcionLarga: item.descripcionLarga,
-    imagen: item.imagen?.url ? `${STRAPI_URL}${item.imagen.url}` : '',
+    imagen: item.imagen?.url 
+      ? (item.imagen.url.startsWith('http') ? item.imagen.url : `${STRAPI_URL}${item.imagen.url}`) 
+      : '',
     color: item.color,
     stats: item.stats || [],
     comoAyudamos: (item.comoAyudamos || []).map((a: any) => a.texto),
@@ -174,8 +180,12 @@ export async function getConfiguracion(): Promise<FormattedConfiguracion | null>
 
     const item = response.data;
     return {
-      logoBlanco: item.logoBlanco?.url ? `${STRAPI_URL}${item.logoBlanco.url}` : '',
-      logoColor: item.logoColor?.url ? `${STRAPI_URL}${item.logoColor.url}` : '',
+      logoBlanco: item.logoBlanco?.url 
+        ? (item.logoBlanco.url.startsWith('http') ? item.logoBlanco.url : `${STRAPI_URL}${item.logoBlanco.url}`) 
+        : '',
+      logoColor: item.logoColor?.url 
+        ? (item.logoColor.url.startsWith('http') ? item.logoColor.url : `${STRAPI_URL}${item.logoColor.url}`) 
+        : '',
       telefono: item.telefono,
       email: item.email,
       direccion: item.direccion,
