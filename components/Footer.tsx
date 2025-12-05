@@ -1,36 +1,38 @@
 // components/Footer.tsx
-import Image from 'next/image';
+interface FooterProps {
+  configuracion: any;
+  textosSitio: any;
+}
 
-const marcas = [
-  { src: '/assets/marcas/liveaqua.svg', alt: 'Live Aqua' },
-  { src: '/assets/marcas/grand.svg', alt: 'Grand Fiesta Americana' },
-  { src: '/assets/marcas/curamoria.svg', alt: 'Curamoria' },
-  { src: '/assets/marcas/fa.svg', alt: 'Fiesta Americana' },
-  { src: '/assets/marcas/explorean.svg', alt: 'Explorean' },
-  { src: '/assets/marcas/logofi.svg', alt: 'Fiesta Inn' },
-  { src: '/assets/marcas/gamma-logo.svg', alt: 'Gamma Hoteles' },
-  { src: '/assets/marcas/one-hoteles.svg', alt: 'One Hoteles' },
-];
+export default function Footer({ configuracion, textosSitio }: FooterProps) {
+  const footerDescripcion = textosSitio?.footerDescripcion || 'Transformando vidas a través de la educación, salud y desarrollo comunitario en México.';
+  const footerContactoTitulo = textosSitio?.footerContactoTitulo || 'Contacto';
+  const footerEnlacesTitulo = textosSitio?.footerEnlacesTitulo || 'Enlaces útiles';
 
-export default function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-brands">
-        {marcas.map((marca) => (
-          <Image
-            key={marca.alt}
-            src={marca.src}
-            alt={marca.alt}
-            width={140}
-            height={40}
-            className="footer-brand-logo"
-          />
-        ))}
+      <div className="footer-content">
+        <div className="footer-section">
+          <h3 className="footer-logo">FUNDACIÓN POSADAS</h3>
+          <p className="footer-desc">{footerDescripcion}</p>
+        </div>
+        
+        <div className="footer-section">
+          <h4 className="footer-title">{footerContactoTitulo}</h4>
+          <p className="footer-text">{configuracion?.telefono}</p>
+          <p className="footer-text">{configuracion?.email}</p>
+          <p className="footer-text">{configuracion?.direccion}</p>
+        </div>
+        
+        <div className="footer-section">
+          <h4 className="footer-title">{footerEnlacesTitulo}</h4>
+          <ul className="footer-links">
+            <li><a href="#impacto">Nuestro impacto</a></li>
+            <li><a href="#iniciativas">Programas</a></li>
+            <li><a href="#donacion">Donar</a></li>
+          </ul>
+        </div>
       </div>
-
-      <p className="footer-copy">
-        Grupo Posadas todos los derechos reservados.
-      </p>
     </footer>
   );
 }
