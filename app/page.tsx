@@ -41,7 +41,9 @@ export default async function HomePage() {
         
         <TaxSection />
         
-        <Newsletter textosSitio={data.textosSitio} />
+        <TaxSection />
+<Newsletter textosSitio={data.textosSitio} />
+<About textosSitio={data.textosSitio} />
         
         <About textosSitio={data.textosSitio} />
       </main>
