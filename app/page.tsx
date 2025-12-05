@@ -20,8 +20,9 @@ export default async function HomePage() {
   return (
     <>
       <Header
-        logoBlanco={data.configuracion?.logoBlanco}
-        logoColor={data.configuracion?.logoColor}
+  logoBlanco={data.configuracion?.logoBlanco}
+  logoColor={data.configuracion?.logoColor}
+  textosSitio={data.textosSitio}
       />
       
       <main>
