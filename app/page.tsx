@@ -20,15 +20,14 @@ export default async function HomePage() {
   return (
     <>
       <Header
-  logoBlanco={data.configuracion?.logoBlanco}
-  logoColor={data.configuracion?.logoColor}
-  textosSitio={data.textosSitio}
+        logoBlanco={data.configuracion?.logoBlanco}
+        logoColor={data.configuracion?.logoColor}
       />
       
       <main>
         <Hero slides={data.heroSlides} />
         
-<ImpactMessage configuracion={data.configuracion} />
+        <ImpactMessage />
         
         <BentoGrid
           stats={data.stats}
@@ -37,21 +36,16 @@ export default async function HomePage() {
         
         <Iniciativas iniciativas={data.iniciativas} />
         
-        <Donation 
-  montos={data.configuracion?.montosDonacion}
-  textosSitio={data.textosSitio}
-/>
+        <Donation montos={data.configuracion?.montosDonacion} />
         
         <TaxSection />
         
-        <TaxSection />
-<Newsletter textosSitio={data.textosSitio} />
-<About textosSitio={data.textosSitio} />
+        <Newsletter />
         
-        <About textosSitio={data.textosSitio} />
+        <About />
       </main>
       
-      <Footer configuracion={data.configuracion} textosSitio={data.textosSitio} />
+      <Footer />
     </>
   );
 }
