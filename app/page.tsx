@@ -43,7 +43,7 @@ export default async function HomePage() {
         
         <Newsletter />
         
-        <About />
+        <About textosSitio={data.textosSitio} />
       </main>
       
       <Footer />
