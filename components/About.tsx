@@ -10,14 +10,11 @@ export default function About({ textosSitio }: AboutProps) {
 
   return (
     <section className="about" id="nosotros">
-      <div className="about-container">
+      <div className="about-inner">
         <div className="about-content">
-          <h2 className="about-heading">{aboutTitulo}</h2>
+          <h2 className="about-title">{aboutTitulo}</h2>
           <p className="about-text">{aboutParrafo1}</p>
           <p className="about-text">{aboutParrafo2}</p>
-        </div>
-        <div className="about-visual">
-          <img src="/assets/fotos/AdobeStock_1299452762.jpeg" alt="Fundación Posadas" />
         </div>
       </div>
     </section>
