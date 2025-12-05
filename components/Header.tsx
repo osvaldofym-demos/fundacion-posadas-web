@@ -4,16 +4,9 @@ import Link from 'next/link';
 interface HeaderProps {
   logoBlanco?: string;
   logoColor?: string;
-  textosSitio: any;
 }
 
-export default function Header({ logoBlanco, logoColor, textosSitio }: HeaderProps) {
-  // Valores por defecto si no hay datos
-  const menuImpacto = textosSitio?.menuImpacto || 'Impacto';
-  const menuIniciativas = textosSitio?.menuIniciativas || 'Iniciativas';
-  const menuNosotros = textosSitio?.menuNosotros || 'Nosotros';
-  const botonDonacion = textosSitio?.botonDonacion || 'Dona ahora';
-
+export default function Header({ logoBlanco, logoColor }: HeaderProps) {
   return (
     <header className="header">
       <div className="header-content">
@@ -23,13 +16,13 @@ export default function Header({ logoBlanco, logoColor, textosSitio }: HeaderPro
         </Link>
         
         <nav className="nav">
-          <Link href="#impacto" className="nav-link">{menuImpacto}</Link>
-          <Link href="#iniciativas" className="nav-link">{menuIniciativas}</Link>
-          <Link href="#nosotros" className="nav-link">{menuNosotros}</Link>
+          <Link href="#impacto" className="nav-link">Impacto</Link>
+          <Link href="#iniciativas" className="nav-link">Iniciativas</Link>
+          <Link href="#nosotros" className="nav-link">Nosotros</Link>
         </nav>
         
         <Link href="#donacion" className="donate-btn">
-          {botonDonacion}
+          Dona ahora
         </Link>
       </div>
     </header>
