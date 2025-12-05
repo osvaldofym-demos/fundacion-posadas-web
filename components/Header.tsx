@@ -2,10 +2,12 @@
 import Link from 'next/link';
 
 interface HeaderProps {
+  logoBlanco?: string;
+  logoColor?: string;
   textosSitio: any;
 }
 
-export default function Header({ textosSitio }: HeaderProps) {
+export default function Header({ logoBlanco, logoColor, textosSitio }: HeaderProps) {
   // Valores por defecto si no hay datos
   const menuImpacto = textosSitio?.menuImpacto || 'Impacto';
   const menuIniciativas = textosSitio?.menuIniciativas || 'Iniciativas';
