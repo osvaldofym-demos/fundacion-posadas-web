@@ -12,20 +12,20 @@ export default function Donation({ montos, textosSitio }: DonationProps) {
   const montosDonacion = montos || [50, 100, 200, 500, 1000];
 
   return (
-    <section className="donation-section" id="donacion">
-      <div className="donation-content">
+    <section className="donation">
+      <div className="donation-inner">
         <h2 className="donation-title">{donacionTitulo}</h2>
         <p className="donation-subtitle">{donacionSubtitulo}</p>
         
-        <div className="donation-amounts">
+        <div className="donation-grid">
           {montosDonacion.map((amount: number) => (
-            <button key={amount} className="amount-btn">
+            <button key={amount} className="donation-amount">
               ${amount}
             </button>
           ))}
         </div>
         
-        <button className="donation-btn-main">
+        <button className="btn-primary">
           {donacionBoton}
         </button>
       </div>
