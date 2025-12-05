@@ -37,7 +37,10 @@ export default async function HomePage() {
         
         <Iniciativas iniciativas={data.iniciativas} />
         
-        <Donation montos={data.configuracion?.montosDonacion} />
+        <Donation 
+  montos={data.configuracion?.montosDonacion}
+  textosSitio={data.textosSitio}
+/>
         
         <TaxSection />
         
