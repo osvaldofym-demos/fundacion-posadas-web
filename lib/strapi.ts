@@ -64,7 +64,7 @@ function getMediaUrl(media: { data: { attributes: { url: string } } | null } | n
 
 // ===== HERO SLIDES =====
 export async function getHeroSlides(): Promise<FormattedHeroSlide[]> {
-  const response = await fetchAPI<StrapiResponse<StrapiData<HeroSlide>[]>>(
+  const response = await fetchAPI<{ data: any[] }>(
     '/hero-slides',
     {
       populate: ['imagen'],
@@ -74,16 +74,16 @@ export async function getHeroSlides(): Promise<FormattedHeroSlide[]> {
 
   return response.data.map((item) => ({
     id: item.id,
-    titulo: item.attributes.titulo,
-    subtitulo: item.attributes.subtitulo,
-    imagen: getMediaUrl(item.attributes.imagen),
-    textoBoton: item.attributes.textoBoton,
+    titulo: item.titulo,
+    subtitulo: item.subtitulo,
+    imagen: item.imagen?.url ? `${STRAPI_URL}${item.imagen.url}` : '',
+    textoBoton: item.textoBoton,
   }));
 }
 
 // ===== INICIATIVAS =====
 export async function getIniciativas(): Promise<FormattedIniciativa[]> {
-  const response = await fetchAPI<StrapiResponse<StrapiData<Iniciativa>[]>>(
+  const response = await fetchAPI<{ data: any[] }>(
     '/iniciativas',
     {
       populate: ['imagen', 'stats', 'comoAyudamos'],
@@ -93,19 +93,19 @@ export async function getIniciativas(): Promise<FormattedIniciativa[]> {
 
   return response.data.map((item) => ({
     id: item.id,
-    nombre: item.attributes.nombre,
-    slug: item.attributes.slug,
-    descripcionCorta: item.attributes.descripcionCorta,
-    descripcionLarga: item.attributes.descripcionLarga,
-    imagen: getMediaUrl(item.attributes.imagen),
-    color: item.attributes.color,
-    stats: item.attributes.stats || [],
-    comoAyudamos: (item.attributes.comoAyudamos || []).map((a) => a.texto),
+    nombre: item.nombre,
+    slug: item.slug,
+    descripcionCorta: item.descripcionCorta,
+    descripcionLarga: item.descripcionLarga,
+    imagen: item.imagen?.url ? `${STRAPI_URL}${item.imagen.url}` : '',
+    color: item.color,
+    stats: item.stats || [],
+    comoAyudamos: (item.comoAyudamos || []).map((a: any) => a.texto),
   }));
 }
 
 export async function getIniciativaBySlug(slug: string): Promise<FormattedIniciativa | null> {
-  const response = await fetchAPI<StrapiResponse<StrapiData<Iniciativa>[]>>(
+  const response = await fetchAPI<{ data: any[] }>(
     '/iniciativas',
     {
       filters: { slug: { $eq: slug } },
@@ -118,21 +118,21 @@ export async function getIniciativaBySlug(slug: string): Promise<FormattedInicia
   const item = response.data[0];
   return {
     id: item.id,
-    nombre: item.attributes.nombre,
-    slug: item.attributes.slug,
-    descripcionCorta: item.attributes.descripcionCorta,
-    descripcionLarga: item.attributes.descripcionLarga,
-    imagen: getMediaUrl(item.attributes.imagen),
-    color: item.attributes.color,
-    stats: item.attributes.stats || [],
-    comoAyudamos: (item.attributes.comoAyudamos || []).map((a) => a.texto),
+    nombre: item.nombre,
+    slug: item.slug,
+    descripcionCorta: item.descripcionCorta,
+    descripcionLarga: item.descripcionLarga,
+    imagen: item.imagen?.url ? `${STRAPI_URL}${item.imagen.url}` : '',
+    color: item.color,
+    stats: item.stats || [],
+    comoAyudamos: (item.comoAyudamos || []).map((a: any) => a.texto),
   };
 }
 
 // ===== STATS =====
 export async function getStats(): Promise<FormattedStat[]> {
-  const response = await fetchAPI<StrapiResponse<StrapiData<StatGeneral>[]>>(
-    '/stats-generales',
+  const response = await fetchAPI<{ data: any[] }>(
+    '/stat-generals',
     {
       sort: ['orden:asc'],
     }
@@ -140,14 +140,14 @@ export async function getStats(): Promise<FormattedStat[]> {
 
   return response.data.map((item) => ({
     id: item.id,
-    numero: item.attributes.numero,
-    etiqueta: item.attributes.etiqueta,
+    numero: item.numero,
+    etiqueta: item.etiqueta,
   }));
 }
 
 // ===== TESTIMONIOS =====
 export async function getTestimonios(): Promise<FormattedTestimonio[]> {
-  const response = await fetchAPI<StrapiResponse<StrapiData<Testimonio>[]>>(
+  const response = await fetchAPI<{ data: any[] }>(
     '/testimonios',
     {
       filters: { activo: { $eq: true } },
@@ -156,31 +156,31 @@ export async function getTestimonios(): Promise<FormattedTestimonio[]> {
 
   return response.data.map((item) => ({
     id: item.id,
-    quote: item.attributes.quote,
-    autor: item.attributes.autor,
-    año: item.attributes.año,
+    quote: item.quote,
+    autor: item.autor,
+    año: item.anio,
   }));
 }
 
 // ===== CONFIGURACIÓN =====
 export async function getConfiguracion(): Promise<FormattedConfiguracion | null> {
   try {
-    const response = await fetchAPI<StrapiResponse<StrapiData<Configuracion>>>(
+    const response = await fetchAPI<{ data: any }>(
       '/configuracion',
       {
         populate: ['logoBlanco', 'logoColor', 'redesSociales'],
       }
     );
 
-    const attrs = response.data.attributes;
+    const item = response.data;
     return {
-      logoBlanco: getMediaUrl(attrs.logoBlanco),
-      logoColor: getMediaUrl(attrs.logoColor),
-      telefono: attrs.telefono,
-      email: attrs.email,
-      direccion: attrs.direccion,
-      montosDonacion: attrs.montosDonacion || [50, 100, 200, 500, 1000],
-      redesSociales: attrs.redesSociales || [],
+      logoBlanco: item.logoBlanco?.url ? `${STRAPI_URL}${item.logoBlanco.url}` : '',
+      logoColor: item.logoColor?.url ? `${STRAPI_URL}${item.logoColor.url}` : '',
+      telefono: item.telefono,
+      email: item.email,
+      direccion: item.direccion,
+      montosDonacion: item.montosDonacion || [50, 100, 200, 500, 1000],
+      redesSociales: item.redesSociales || [],
     };
   } catch {
     return null;
