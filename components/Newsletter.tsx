@@ -10,22 +10,22 @@ export default function Newsletter({ textosSitio }: NewsletterProps) {
   const newsletterBoton = textosSitio?.newsletterBoton || 'Suscribirse';
 
   return (
-    <section className="newsletter-section">
-      <div className="newsletter-content">
-        <div className="newsletter-text">
-          <h2 className="newsletter-title">{newsletterTitulo}</h2>
-          <p className="newsletter-subtitle">{newsletterSubtitulo}</p>
-        </div>
-        <form className="newsletter-form">
-          <input
-            type="email"
-            placeholder={newsletterPlaceholder}
-            className="newsletter-input"
-            required
-          />
-          <button type="submit" className="newsletter-btn">
-            {newsletterBoton}
-          </button>
+    <section className="newsletter">
+      <div className="newsletter-inner">
+        <h2 className="newsletter-title">{newsletterTitulo}</h2>
+        <p className="newsletter-sub">{newsletterSubtitulo}</p>
+        <form className="subscribe-form">
+          <div className="email-input-wrap">
+            <input
+              type="email"
+              placeholder={newsletterPlaceholder}
+              className="email-input"
+              required
+            />
+            <button type="submit" className="subscribe-btn">
+              {newsletterBoton}
+            </button>
+          </div>
         </form>
       </div>
     </section>
