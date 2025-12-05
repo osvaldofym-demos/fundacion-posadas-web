@@ -48,7 +48,7 @@ export default async function HomePage() {
         <About textosSitio={data.textosSitio} />
       </main>
       
-      <Footer />
+      <Footer configuracion={data.configuracion} textosSitio={data.textosSitio} />
     </>
   );
 }
