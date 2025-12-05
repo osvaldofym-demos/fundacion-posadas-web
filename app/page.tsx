@@ -27,7 +27,7 @@ export default async function HomePage() {
       <main>
         <Hero slides={data.heroSlides} />
         
-<ImpactMessage configuracion={configuracion} />
+<ImpactMessage configuracion={data.configuracion} />
         
         <BentoGrid
           stats={data.stats}
