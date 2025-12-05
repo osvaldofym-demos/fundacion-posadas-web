@@ -196,15 +196,28 @@ export async function getConfiguracion(): Promise<FormattedConfiguracion | null>
     return null;
   }
 }
+// ===== TEXTOS DEL SITIO =====
+export async function getTextosSitio(): Promise<any | null> {
+  try {
+    const response = await fetchAPI<{ data: any }>(
+      '/textos-del-sitio',
+      {}
+    );
 
+    return response.data;
+  } catch {
+    return null;
+  }
+}
 // ===== GET ALL DATA (para la página principal) =====
 export async function getHomePageData() {
-  const [heroSlides, iniciativas, stats, testimonios, configuracion] = await Promise.all([
+  const [heroSlides, iniciativas, stats, testimonios, configuracion, textosSitio] = await Promise.all([
     getHeroSlides().catch(() => []),
     getIniciativas().catch(() => []),
     getStats().catch(() => []),
     getTestimonios().catch(() => []),
     getConfiguracion().catch(() => null),
+    getTextosSitio().catch(() => null),
   ]);
 
   return {
@@ -213,5 +226,6 @@ export async function getHomePageData() {
     stats,
     testimonios,
     configuracion,
+    textosSitio,
   };
 }
